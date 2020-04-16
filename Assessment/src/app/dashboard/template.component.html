@@ -1,0 +1,76 @@
+
+
+<div class="fra-height-fluid">
+  <mat-sidenav-container class="fra-height-fluid"> <!--[ngStyle]="width: isCollapsed ? '60px' : '160px'"-->
+
+    <mat-sidenav   [ngStyle]="{ 'width.em': sidenavWidth }" #snav [opened]="sidenav.opened" [mode]="sidenav.mode" [fixedInViewport]="true" [fixedTopGap]="sidenav.fixedTopGap" class="mat-elevation-z2">
+
+      <!-- Main -->
+      <mat-nav-list role="navigation" *ngIf="sidebarType == 'main'">
+        <a [routerLink]="['/']" mat-list-item>
+          <mat-icon matListIcon>dashboard</mat-icon>
+          <span matLine>Dashboard</span>
+        </a>
+
+        <a [routerLink]="['/search']" mat-list-item>
+          <mat-icon matListIcon>search</mat-icon>
+          <span matLine>Search</span>
+        </a>
+        <a [routerLink]="['/account']" mat-list-item>
+          <mat-icon matListIcon>account_circle</mat-icon>
+          <span matLine>Account</span>
+        </a>
+
+        <a [routerLink]="['/work']" mat-list-item>
+          <mat-icon matListIcon>work</mat-icon>
+          <span matLine>Work</span>
+        </a>
+        <a [routerLink]="['/calendar']" mat-list-item>
+          <mat-icon matListIcon>calendar_today</mat-icon>
+          <span matLine>calendar</span>
+        </a>
+        <a [routerLink]="['/myfiles']" mat-list-item>
+          <mat-icon matListIcon> insert_drive_file</mat-icon>
+          <span matLine>My Files</span>
+        </a>
+        <a [routerLink]="['/messages']" mat-list-item>
+          <mat-icon matListIcon> message</mat-icon>
+          <span matLine>Dashboard</span>
+        </a>
+
+        <a [routerLink]="['/settings']" mat-list-item>
+          <mat-icon matListIcon>build</mat-icon>
+          <span matLine>Settings</span>
+        </a>
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="example-sidenav-content">
+        <header class="mdc-top-app-bar mdc-top-app-bar--fixed mat-elevation-z4" @slideInDownSmall>
+            <div class="mdc-top-app-bar__row">
+              <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <a (click)="snav.toggle()" class="material-icons mdc-top-app-bar__navigation-icon header-toggle-icon">menu</a>
+                <span class="mdc-top-app-bar__title">Contract <span style="color: black;">Portal</span> </span>
+              </section>
+              <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                <button class="profile-icon" mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>account_circle</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <mat-icon>face</mat-icon>
+                    <span>Profile</span>
+                  </button>
+                  <button (click)="logout()" mat-menu-item>
+                    <mat-icon>power_settings_new</mat-icon>
+                    <span>Sign out</span>
+                  </button>
+                </mat-menu>
+              </section>
+            </div>
+          </header>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

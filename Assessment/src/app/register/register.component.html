@@ -1,0 +1,120 @@
+﻿<div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+<h2>Create User</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+        <label for="username" class="col-sm-4 col-form-label">Username</label>
+        <div class="col-sm-4">
+            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        </div>
+        <div *ngIf="submitted && f.username.errors" class="validation_error col-sm-4">
+            <div *ngIf="f.username.errors.required">First Name is required</div>
+        </div>
+    </div>
+    <div class="form-group row">
+            <label for="email" class="col-sm-4 col-form-label">Email</label>
+            <div class="col-sm-4">
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            </div>
+            <div *ngIf="submitted && f.email.errors" class="validation_error col-sm-4">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+            </div>
+    </div>
+    <div class="form-group row">
+            <label for="password" class="col-sm-4 col-form-label">Password</label>
+            <div class="col-sm-4">
+                <input type="text" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            </div>
+            <div *ngIf="submitted && f.password.errors" class="validation_error col-sm-4">
+                <div *ngIf="f.password.errors.required">password is required</div>
+                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                <div *ngIf="f.password.errors.maxlength">Password must be at least 10 characters</div>
+            </div>
+    </div>
+    <div class="form-group row">
+            <label for="confirmPassword" class="col-sm-4 col-form-label">Confirm Password</label>
+            <div class="col-sm-4">
+                <input type="text" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+            </div>
+            <div *ngIf="submitted && f.confirmPassword.errors" class="validation_error col-sm-4">
+                <div *ngIf="f.confirmPassword.errors.required">Confirm password is required</div>
+                <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+            </div>
+    </div>
+
+
+    <div class="form-group row">
+            <label for="displayName" class="col-sm-4 col-form-label">Display Name</label>
+            <div class="col-sm-4">
+                <input type="text" formControlName="displayName" class="form-control"  />
+            </div>
+            <div *ngIf="submitted && f.displayName.errors" class="validation_error col-sm-4">
+                    <div *ngIf="f.displayName.errors.required">Display Name is required</div>
+            </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="firstName" class="col-sm-4 col-form-label">Name</label>
+        <div class="col-sm-4">
+            <input type="text" formControlName="firstName" class="form-control" />
+          
+        </div>
+        <div class="col-sm-4">
+                <input type="text" formControlName="lastName" class="form-control"  />
+               
+        </div>        
+    </div>
+
+    <div class="form-group row">
+            <label for="nickname" class="col-sm-4 col-form-label">Nickname</label>
+            <div class="col-sm-4">
+                <input type="text" formControlName="nickname" class="form-control"  />
+            </div>
+    </div>
+
+    <div class="form-group row">
+            <label for="website" class="col-sm-4 col-form-label">Website</label>
+            <div class="col-sm-4">
+                <input type="text" formControlName="website" class="form-control"  />
+            </div>
+    </div>
+    
+    <div class="form-group row">
+            <label for="bio" class="col-sm-4 col-form-label">Bio</label>
+            <div class="col-sm-8">
+                <textarea type="text" formControlName="bio" class="form-control"  ></textarea>
+            </div>
+    </div>
+
+
+    <div class="form-group row">
+            <label for="jabber" class="col-sm-4 col-form-label">Jabber</label>
+            <div class="col-sm-4">
+                <input type="text" formControlName="jabber" class="form-control"  />
+            </div>
+    </div>
+
+    <div class="form-group row">
+            <label for="aol" class="col-sm-4 col-form-label">AOL IM</label>
+            <div class="col-sm-4">
+                <input type="text" formControlName="aol" class="form-control" />
+            </div>
+    </div>
+
+    <div class="form-group row">
+            <label for="yahoo" class="col-sm-4 col-form-label">Yahoo IM</label>
+            <div class="col-sm-4">
+                <input type="text" formControlName="yahoo" class="form-control"  />
+            </div>
+    </div>
+
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Register</button>
+        <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        <a routerLink="/login" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+< </div>
+    </div>
+</div>
