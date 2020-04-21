@@ -9,11 +9,11 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<User[]>(`${environment.apiUrl}/users`);
+        return this.http.get<User[]>(`${environment.apiUrl}/api/users`);
     }
 
     getById(id: number) {
-        return this.http.get(`${environment.apiUrl}/users/${id}`);
+        return this.http.get(`${environment.apiUrl}/api/users/${id}`);
     }
 
     register(user: User) {
@@ -21,10 +21,15 @@ export class UserService {
     }
 
     update(user: User) {
-        return this.http.put(`${environment.apiUrl}/users/${user.id}`, user);
+        return this.http.put(`${environment.apiUrl}/api/users/${user.id}`, user);
     }
 
     delete(id: number) {
-        return this.http.delete(`${environment.apiUrl}/users/${id}`);
+        return this.http.delete(`${environment.apiUrl}/api/users/${id}`);
     }
+
+    checkUserAlreadyExists(input: User) {
+        return this.http.post<User>(`${environment.apiUrl}/api/users/check-user-already-exists`, input)            
+    }
+    
 }

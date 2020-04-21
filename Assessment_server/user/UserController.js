@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var VerifyToken = require(__root + 'auth/VerifyToken');
 
 router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 var User = require('./User');
 
 // CREATES A NEW USER
@@ -52,6 +53,16 @@ router.put('/:id', /* VerifyToken, */ function (req, res) {
     User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, user) {
         if (err) return res.status(500).send("There was a problem updating the user.");
         res.status(200).send(user);
+    });
+});
+
+// RETURNS ALL THE USERS IN THE DATABASE
+router.post('/check-user-already-exists', function (req, res) {
+   User.findOne(req.body, function (err, user) {
+        if (err) return res.status(500).send("There was a problem finding the users.");
+        if (!user) return res.status(404).send('No user found.');
+        
+        res.status(200).send(req.body);
     });
 });
 

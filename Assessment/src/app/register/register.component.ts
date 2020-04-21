@@ -1,6 +1,7 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { User } from './../_models/user';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { MustMatch } from '../_helpers/must-match.validator';
 import { AlertService, UserService, AuthenticationService } from '@app/_services';
@@ -27,8 +28,8 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            email: ['', Validators.required, Validators.email ,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')],
-            username: ['', Validators.required],
+            email: ['',[ Validators.required, Validators.email ,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), this.validateUserAlreadyExist('email')]],
+            username: ['', [Validators.required, this.validateUserAlreadyExist('username')]],
             password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
             confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
             displayName: ['',[Validators.required]],
@@ -68,5 +69,28 @@ export class RegisterComponent implements OnInit {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+    }
+
+    
+    private validateUserAlreadyExist(input): ValidatorFn{
+        return (control: AbstractControl): {[key: string]: any} => {
+          let field = {};
+          field[input] = control.value;
+          return this.userService.checkUserAlreadyExists(field)
+            .subscribe(
+              (data) => {
+                let res: User = data;
+                if (res[input] === control.value) {
+                  control.setErrors({ alreadyExist: true });
+                  return {'alreadyExist': true};
+                } else {
+                  return null
+                }
+              },
+              (error) => {
+                console.log(error);
+              }
+            )
+        }
     }
 }

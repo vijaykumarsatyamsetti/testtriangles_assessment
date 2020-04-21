@@ -4,21 +4,27 @@
 <h2>Create User</h2>
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-group row">
-        <label for="username" class="col-sm-4 col-form-label">Username</label>
-        <div class="col-sm-4">
-            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-        </div>
-        <div *ngIf="submitted && f.username.errors" class="validation_error col-sm-4">
-            <div *ngIf="f.username.errors.required">First Name is required</div>
-        </div>
+            <label for="username" class="col-sm-4 col-form-label">Username</label>
+            <div class="col-sm-4">
+                <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            </div>
+            <div *ngIf="submitted && f.username.errors && f.username.errors.required" class="validation_error col-sm-4">
+                <div>First Name is required</div>
+            </div>
+            <div *ngIf="f.username.errors" class="validation_error col-sm-4">
+                <div *ngIf="f.username.errors.alreadyExist">Username already exists</div>
+            </div>
     </div>
     <div class="form-group row">
             <label for="email" class="col-sm-4 col-form-label">Email</label>
             <div class="col-sm-4">
                 <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
             </div>
-            <div *ngIf="submitted && f.email.errors" class="validation_error col-sm-4">
-                <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="submitted && f.email.errors && f.email.errors.required" class="validation_error col-sm-4">
+                <div>Email is required</div>
+            </div>
+            <div *ngIf="f.email.errors" class="validation_error col-sm-4">
+                <div *ngIf="f.email.errors.alreadyExist">Email is already exists</div>
             </div>
     </div>
     <div class="form-group row">
