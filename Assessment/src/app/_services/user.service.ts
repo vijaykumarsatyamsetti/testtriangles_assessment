@@ -28,7 +28,7 @@ export class UserService {
         return this.http.delete(`${environment.apiUrl}/api/users/${id}`);
     }
 
-    checkUserAlreadyExists(input: User) {
+    checkUserAlreadyExists(input: any) {
         return this.http.post<User>(`${environment.apiUrl}/api/users/check-user-already-exists`, input)            
     }
     
